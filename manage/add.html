@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>add</title>
+  <link href="css/public.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div id="dcWrap">
+    <div id="dcHead">
+      <div id="head">
+        <div class="logo"><a href="#" style="line-height: 1.5;color: aliceblue;font-weight: 900;font-size: 24px;">administration</a></div>
+        <div class="nav">
+          <ul class="navRight">
+            <li class="M noLeft"><a href="#">您好，admin</a></li>
+            <li class="noRight"><a href="#">退出</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="dcLeft">
+      <div id="menu">
+        <ul>
+          <li class="cur"><a href="fundariser.html"><i class="fundariser"></i><em>fundariser</em></a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="dcMain">
+      <div class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+        <h3><a href="fundariser.html" class="actionBtn">list</a>ADD</h3>
+        <form action="fundariser.php?rec=insert" method="post" enctype="multipart/form-data">
+          <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+            <tr>
+              <td width="90" align="right">CAPTION</td>
+              <td>
+                <input type="text" name="title" value="" size="80" class="inpMain" />
+              </td>
+            </tr>
+            <tr>
+              <td align="right">CATEGORY</td>
+              <td>
+                <select name="cat_id" style="width: 800px;height: 38px;">
+                  <option value="0">未分类</option>
+                  <option value="1"> 公司动态</option>
+                  <option value="2"> 行业新闻</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td align="right">ORGANIZER</td>
+              <td>
+                <input type="text" name="keywords" value="" size="50" class="inpMain" />
+              </td>
+            </tr>
+            <tr>
+              <td align="right">CITY</td>
+              <td>
+                <input type="text" name="description" value="" size="50" class="inpMain" />
+              </td>
+            </tr>
+            <tr>
+              <td align="right">TARGET_FUNDING</td>
+              <td>
+                <input type="text" name="keywords" value="" size="50" class="inpMain" />
+              </td>
+            </tr>
+            <tr>
+              <td align="right">STATUS</td>
+              <td>
+                <select name="CATEGORY_id" style="width: 800px;height: 38px;">
+                  <option value="0">ACTIVE</option>
+                  <option value="1">SUSPENDED</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td align="right" valign="top">DESCRIBE</td>
+              <td>
+                <textarea id="content" name="content" style="width:788px;height:200px;" class="textArea"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td align="right">PICTURE</td>
+              <td>
+                <input type="file" name="image" size="38" class="inpFlie" />
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <input type="hidden" name="token" value="7e4a88fb" />
+                <input type="hidden" name="image" value="">
+                <input type="hidden" name="id" value="">
+                <input name="submit" type="submit" value="提交" style="width: 60px;height: 30px;background-color: cornflowerblue;border-radius: 4px;line-height: 30px;color: aliceblue;" />
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+</body>
+
+</html>
