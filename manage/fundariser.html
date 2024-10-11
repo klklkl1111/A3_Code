@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>list</title>
+        <link href="css/public.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+        <div id="dcWrap">
+                <div id="dcHead">
+                        <div id="head">
+                                <div class="logo"><a href="#" style="line-height: 1.5;color: aliceblue;font-weight: 900;font-size: 24px;">administration</a>
+                                </div>
+                                <div class="nav">
+                                        <ul class="navRight">
+                                                <li class="M noLeft"><a href="#">您好，admin</a></li>
+                                                <li class="noRight"><a href="#">退出</a></li>
+                                        </ul>
+                                </div>
+                        </div>
+                </div>
+                <div id="dcLeft">
+                        <div id="menu">
+                                <ul>
+                                        <li class="cur"><a href="fundariser.html"><i class="fundariser"></i><em>fundariser</em></a>
+                                        </li>
+                                </ul>
+                        </div>
+                </div>
+                <div id="dcMain">
+                        <div class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+                                <h3><a href="add.html" class="actionBtn add">add</a>LIST</h3>
+                                <div class="filter">
+                                        <form action="article.php" method="post">
+                                                <select id="category_select" name="cat_id" style="width: 180px;height: 29px;">
+                                                        <option value="0">medical</option>
+                                                        <option value="1">education</option>
+                                                        <option value="2">行业新闻</option>
+                                                </select>
+                                                <input name="keyword" type="text" value="" size="20" style="width: 200px;height: 30px;background-color: aliceblue;padding-left: 8px;box-sizing: border-box;" />
+                                                <input name="submit" type="submit" value="筛选" style="width: 60px;height: 29px;background-color: cornflowerblue;border-radius: 4px;cursor: pointer;" />
+                                        </form>
+                                </div>
+                                <div id="list" style="margin-top: 18px;">
+                                        <form name="action" method="post" action="article.php?rec=action">
+                                                <table width="100%" border="1" cellpadding="8" cellspacing="0">
+                                                        <tr>
+                                                                <th width="40" align="center">ID</th>
+                                                                <th align="center">CAPTION</th>
+                                                                <th align="center">ORGANIZER</th>
+                                                                <th align="center">TARGET</th>
+                                                                <th align="center">CURRENT</th>
+                                                                <th align="center">CITY</th>
+                                                                <th align="center">STATUS</th>
+                                                                <th align="center">CATEGORY</th>
+                                                                <th width="80" align="center">操作</th>
+                                                        </tr>
+                                                        <tr>
+                                                                <td align="center">1</td>
+                                                                <td align="center">移动互联网产品设计的核心要素有哪些？</td>
+                                                                <td align="center">公司动态</td>
+                                                                <td align="center">2013-06-26</td>
+                                                                <td align="center">公司动态</td>
+                                                                <td align="center">2013-06-26</td>
+                                                                <td align="center">公司动态</td>
+                                                                <td align="center">2013-06-26</td>
+                                                                <td align="center">
+                                                                        <a style="color: royalblue;" href="#">编辑</a>
+                                                                        <a style="color: red;" href="#">删除</a>
+                                                                </td>
+                                                        </tr>
+                                                </table>
+                                        </form>
+                                </div>
+                        </div>
+                </div>
+        </div>
+        <script>
+                (function() {
+                        
+                })()
+        </script>
+</body>
+
+</html>
