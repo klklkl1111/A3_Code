@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>details</title>
+		<link href="css/style.css" rel='stylesheet' type='text/css' />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		</head>
+	<body>
+		<div class="header top-header">
+			<div class="container">
+				<div class="top-nav">
+					<span class="menu"></span>
+					<ul>
+						<li><a href="index.html">Home<span> </span></a></li>
+						<li><a href="Fundaries.html">Fundraiser</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="content">
+			<div class="container">
+			<div class="content-inner">
+				<div class="artical-details">
+					<h2><a href="#">Fundraiser Details</a></h2>
+					<div id="content" class="artical-details-info"></div>
+					<div class="user-title">List Of Donors</div>
+					<div id="user-list" class="user-list"></div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<script>
+			(function() {
+				getId()
+			})()
+			function getId() {
+				var url = location.search;
+				if (url.indexOf("?") != -1) {
+					var text = url.substr(1);
+					ids = text.split("=");
+					getDetail(ids[1])
+					getDonation(ids[1])
+				}
+			}
+			function getDetail(id) {
+				fetch('http://localhost:8999/fundraiser/' + id).then(res => {
+					return res.json()
+				}).then(response => {
+					const content = document.getElementById('content')
+					let html = `
+						<div class="artical-details-info-left">
+							<a href="#"><img src="`+ response[0].IMAGEURL +`" title="name" /></a>
+						</div>
+						<div class="artical-details-info-right">
+							<p><strong>Caption:</strong>`+ response[0].CAPTION +`</p>
+							<p><strong>Organizer:</strong>`+ response[0].ORGANIZER +`</p>
+							<p><strong>TargetFund:</strong>`+ response[0].TARGET_FUNDING +`</p>
+							<p><strong>CurrentFund:</strong>`+ response[0].CURRENT_FUNDING +`</p>
+							<p><strong>City:</strong>`+ response[0].CITY +`</p>
+							<p><strong>Status:</strong>`+ (response[0].ACTIVE == 1 ? 'ACTIVE' : 'SUSPENDED') +`</p>
+							<p><strong>Category:</strong>` + response[0].NAME + `</p>
+							<div class="dicription">
+								<p><strong>Description :</strong>`+ response[0].DESCRIBE +`</p>
+							</div>
+							<a class="donate" href="./donate.html?id=`+ id +`">Donate</a>
+						</div>
+					`
+					content.innerHTML = html
+				})
+			}
+			function getDonation(id) {
+				fetch('http://localhost:8999/donationList/' + id).then(res => {
+					return res.json()
+				}).then(response => {
+					const list = document.querySelector('#user-list')
+					let inner = ''
+					response.forEach(item => {
+						inner += `
+							<div class="item">
+								<div class="icon"></div>
+								<div class="info">
+									<div class="name">`+item.GIVER+`</div>
+									<div class="amount">$`+item.AMOUNT+`</div>
+								</div>
+							</div>
+						`
+					})
+					list.innerHTML = inner
+				})
+			}
+		</script>
+	</body>
+</html>
+
