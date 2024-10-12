@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>donate</title>
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div class="header top-header">
+        <div class="container">
+            <div class="top-nav">
+                <span class="menu"></span>
+                <ul>
+                    <li><a href="index.html">Home<span> </span></a></li>
+                    <li><a href="Fundaries.html">Fundraiser</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="donate-content">
+            <div class="info">
+                <img id="info-img" src="" alt="">
+                <div id="info-title" class="info-title"></div>
+            </div>
+            <div class="donate-box">
+                <p class="input-container">
+                    <input type="number" placeholder="Enter your amount" name="text" id="amount" class="input-field" autocomplete="name">
+                    <label class="input-label" for="text">AMOUNT</label>
+                </p>
+                <p class="input-container">
+                    <input type="text" placeholder="Enter your name" name="text" id="name" class="input-field" autocomplete="name">
+                    <label class="input-label" for="text">Name</label>
+                </p>
+                <button onclick="donate()">DONATE</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let fundraiser_id = null
+        window.onload = function () {
+            getId()
+        }
+        function getId() {
+            var url = location.search;
+            if (url.indexOf("?") != -1) {
+                var text = url.substr(1);
+                ids = text.split("=");
+                getDetail(ids[1])
+            }
+        }
+        function getDetail(id) {
+            fundraiser_id = id
+            fetch('http://localhost:8999/fundraiser/' + id).then(res => {
+                return res.json()
+            }).then(response => {
+                document.querySelector('#info-img').src = response[0].IMAGEURL
+                document.querySelector('#info-title').innerHTML = response[0].CAPTION
+            })
+        }
+        function donate() {
+            const amount = document.querySelector('#amount').value
+            const name = document.querySelector('#name').value
+            if (!amount || !name) {
+                alert('Please Enter The Information')
+            } else if (amount < 5) {
+                alert('The minimum of donation is 5 AUD')
+            } else {
+                const data = {
+                    FUNDRAISER_ID: fundraiser_id,
+                    AMOUNT: amount,
+                    GIVER: name,
+                    DATE: new Date().toLocaleString()
+                }
+                fetch('http://localhost:8999/donation',
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    }
+                )
+                window.location.href = 'details.html?fundId=' + fundraiser_id
+            }
+        }
+    </script>
+</body>
+
+</html>
