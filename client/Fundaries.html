@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>details</title>
+		<link href="css/style.css" rel='stylesheet' type='text/css' />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		</head>
+	<body>
+		<div class="header top-header">
+			<div class="container">
+				<div class="top-nav">
+					<span class="menu"> </span>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li class="active"><a href="Fundaries.html">Fundraiser<span> </span></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="categories">
+			<div class="container">
+				<div class="categories-left">
+					<ul id="category" class="options">
+					</ul>
+				</div>
+				<div class="categories-right">
+					<form>
+						<input class="search" type="submit" value="Search" />
+						<input class="clear" type="submit" value="Clear" />
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="content">
+			<div class="container">
+				<div class="fundaries">
+					<h1>Fundraiser</h1>
+					<div id="content" class="fundaries-grids">
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			(function () {
+				getCategory()
+			})()
+			function getCategory() {
+				fetch('http://localhost:8999/category').then(res => {
+					return res.json()
+				}).then(response => {
+					const categoryList = document.getElementById('category')
+					let html = ''
+					response.forEach(item => {
+						html += `
+						<li><a data-category="`+ item.CATEGORY_ID +`" href="#">`+item.NAME+`</a></li>
+						`
+					})
+					categoryList.innerHTML = html
+					const searchBtn = document.querySelector('.search');
+					const clearBtn = document.querySelector('.clear');
+					categoryList.addEventListener('click', function (e) {
+						let target = e.target;
+						if (target.tagName === 'A') {
+							target = target.closest('li');
+						}
+						if (target.tagName === 'LI') {
+							target.classList.toggle('select');
+						}
+					});
+					searchBtn.addEventListener('click', function () {
+						const selectedCategories = Array.from(categoryList.querySelectorAll('li.select a'))
+							.map(a => a.getAttribute('data-category'));
+						if (selectedCategories.length > 0) {
+							getList(selectedCategories.join(', '))
+						} else {
+							document.getElementById('content').innerHTML = '<div class="none">PLEASE SELECT CATEGORY</div>'
+						}
+					});
+					clearBtn.addEventListener('click', function () {
+						categoryList.querySelectorAll('li.select').forEach(li => {
+							li.classList.remove('select');
+						});
+					});
+				})
+			}
+			function getList(ids) {
+				fetch('http://localhost:8999/search?category='+ids).then(res => {
+					return res.json()
+				}).then(response => {
+					const content = document.getElementById('content')
+					let html = ''
+					if (response.length) {
+						response.forEach(item => {
+							html += `
+						<div onclick="location.href='details.html?fundId=`+ item.FUNDRAISER_ID + `';" class="fundaries-grid">
+							<div class="fundaries-grid-pic">
+								<img src="`+ item.IMAGEURL + `" title="name" />
+							</div>
+							<div class="fundaries-grid-info">
+								<p><strong>Target:</strong> $`+ item.TARGET_FUNDING + `</p>
+								<p><strong>Current:</strong> $`+ item.CURRENT_FUNDING + `</p>
+								<p><strong>category:</strong>`+ item.NAME + `</p>
+								<a class="download-fundaries" href="details.html?fundId=`+ item.FUNDRAISER_ID + `">VIEW MORE</a>
+							</div>
+						</div>
+						`
+						})
+					} else {
+						html = '<div class="none">NONE</div>'
+					}
+					content.innerHTML = html
+				})
+			}
+		</script>
+	</body>
+</html>
+
