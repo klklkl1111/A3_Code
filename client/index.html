@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Home</title>
+		<link href="css/style.css" rel='stylesheet' type='text/css' />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<div class="header">
+			<div class="container">
+				<div class="top-nav">
+					<ul>
+						<li class="active"><a href="index.html">Home<span> </span></a></li>
+						<li><a href="Fundaries.html">Fundraiser</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="content">
+			<div class="container">
+				<div id="content" class="content">
+					
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<img src="./images/1.png" alt="">
+			<p>Our hearts go out to everyone affected by these crises. We’re here to help.</p>
+		</div>
+		<script>
+			(function() {
+				getActiveFund()
+			})()
+			function getActiveFund() {
+				fetch('http://localhost:8999/search').then(res => {
+					return res.json()
+				}).then(response => {
+					const data = []
+					response.forEach(element => {
+						if (element.ACTIVE === 1 && data.length < 3) {
+							data.push(element)
+						}
+					});
+					const content = document.getElementById('content')
+					let html = ''
+					data.forEach(item => {
+						html += `
+							<div onclick="location.href='details.html?fundId=`+item.FUNDRAISER_ID+`';" class="artical">
+								<div class="artical-left">
+									<a href="#"><img src="`+ item.IMAGEURL +`"/></a>
+								</div>
+								<div class="artical-right">
+									<div class="artical-head">
+										<h2><a href="#">`+ item.CAPTION +`</a></h2>
+									</div>
+									<div class="artical-info">
+										<p><strong>Organizer:</strong> `+ item.ORGANIZER +`</p>
+										<p><strong>TarrgetFund:</strong>$`+ item.TARGET_FUNDING +`</p>
+										<p><strong>CurrentFund:</strong>$`+ item.CURRENT_FUNDING +`</p>
+										<p><strong>City:</strong>`+ item.CITY +`</p>
+										<p><strong>Status:</strong>` + (item.ACTIVE == 1 ? 'ACTIVE' : 'SUSPENDED') + `</p>
+										<p><strong>Category:</strong>`+ item.NAME +`</p>
+									</div>
+								</div>
+							</div>
+						`
+					})
+					content.innerHTML = html
+				})
+			}
+		</script>
+	</body>
+</html>
+
