@@ -37,7 +37,7 @@
 				}).then(response => {
 					const data = []
 					response.forEach(element => {
-						if (element.ACTIVE === 1 && data.length < 3) {
+						if (element.ACTIVE == 1 && data.length < 3) {
 							data.push(element)
 						}
 					});
