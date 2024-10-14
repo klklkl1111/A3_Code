@@ -53,7 +53,7 @@
         }
         function getDetail(id) {
             fundraiser_id = id
-            fetch('http://localhost:8999/fundraiser/' + id).then(res => {
+            fetch('https://24274915.it.scu.edu.au/api/fundraiser/' + id).then(res => {
                 return res.json()
             }).then(response => {
                 document.querySelector('#info-img').src = response[0].IMAGEURL
@@ -74,7 +74,7 @@
                     GIVER: name,
                     DATE: new Date().toLocaleString()
                 }
-                fetch('http://localhost:8999/donation',
+                fetch('https://24274915.it.scu.edu.au/api/donation',
                     {
                         method: 'POST',
                         headers: {
