@@ -1,0 +1,67 @@
+<div id="dcWrap">
+  <div id="dcHead">
+    <div id="head">
+      <div class="logo"><a href="#"
+                           style="line-height: 1.5;color: aliceblue;font-weight: 900;font-size: 24px;">administration</a>
+      </div>
+      <div class="nav">
+        <ul class="navRight">
+          <li class="M noLeft"><a href="#">您好，admin</a></li>
+          <li class="noRight"><a href="#">退出</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="dcLeft">
+    <div id="menu">
+      <ul>
+        <li class="cur"><a href="/manage/admin"><i class="fundariser"></i><em>fundariser</em></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div id="dcMain">
+    <div class="mainBox" style="height:auto!important;height:550px;min-height:550px;">
+      <h3><a href="/manage/addFundraisers" class="actionBtn add">add</a>LIST</h3>
+      <div class="filter">
+        <div style="display: flex;">
+          <select id="category" style="width: 180px;height: 29px;"></select>
+          <div class="search-btn" (click)="getList()">serach</div>
+        </div>
+      </div>
+      <div id="list" style="margin-top: 18px;">
+          <table id="fundraiser_list" width="100%" border="1" cellpadding="8" cellspacing="0">
+            <thead>
+            <tr>
+              <th width="40" align="center">ID</th>
+              <th align="center">CAPTION</th>
+              <th align="center">ORGANIZER</th>
+              <th align="center">TARGET</th>
+              <th align="center">CURRENT</th>
+              <th align="center">CITY</th>
+              <th align="center">STATUS</th>
+              <th align="center">CATEGORY</th>
+              <th width="80" align="center">ACTION</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let fundraiser of tableList">
+              <td style="text-align: center;">{{fundraiser.FUNDRAISER_ID}}</td>
+              <td style="text-align: center;">{{fundraiser.CAPTION}}</td>
+              <td style="text-align: center;">{{fundraiser.ORGANIZER}}</td>
+              <td style="text-align: center;">{{fundraiser.TARGET_FUNDING}}</td>
+              <td style="text-align: center;">{{fundraiser.CURRENT_FUNDING}}</td>
+              <td style="text-align: center;">{{fundraiser.CITY}}</td>
+              <td style="text-align: center;">{{fundraiser.ACTIVE == 1 ? 'ACTIVE' : 'SUSPENDED'}}</td>
+              <td style="text-align: center;">{{fundraiser.NAME}}</td>
+              <td>
+                <button style="margin-right: 10px;" (click)="editItem(fundraiser.FUNDRAISER_ID)">Edit</button>
+                <button style="color: red;" (click)="deleteItem(fundraiser.FUNDRAISER_ID)">Delete</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>
