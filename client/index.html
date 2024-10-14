@@ -32,7 +32,7 @@
 				getActiveFund()
 			})()
 			function getActiveFund() {
-				fetch('http://localhost:8999/search').then(res => {
+				fetch('https://24274915.it.scu.edu.au/api/search').then(res => {
 					return res.json()
 				}).then(response => {
 					const data = []

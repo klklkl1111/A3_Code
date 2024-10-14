@@ -44,7 +44,7 @@
 				}
 			}
 			function getDetail(id) {
-				fetch('http://localhost:8999/fundraiser/' + id).then(res => {
+				fetch('https://24274915.it.scu.edu.au/api/fundraiser/' + id).then(res => {
 					return res.json()
 				}).then(response => {
 					const content = document.getElementById('content')
@@ -70,7 +70,7 @@
 				})
 			}
 			function getDonation(id) {
-				fetch('http://localhost:8999/donationList/' + id).then(res => {
+				fetch('https://24274915.it.scu.edu.au/api/donationList/' + id).then(res => {
 					return res.json()
 				}).then(response => {
 					const list = document.querySelector('#user-list')
@@ -92,5 +92,4 @@
 		</script>
 	</body>
 </html>
-
 

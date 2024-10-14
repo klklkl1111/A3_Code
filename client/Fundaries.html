@@ -45,7 +45,7 @@
 				getCategory()
 			})()
 			function getCategory() {
-				fetch('http://localhost:8999/category').then(res => {
+				fetch('https://24274915.it.scu.edu.au/api/category').then(res => {
 					return res.json()
 				}).then(response => {
 					const categoryList = document.getElementById('category')
@@ -84,7 +84,7 @@
 				})
 			}
 			function getList(ids) {
-				fetch('http://localhost:8999/search?category='+ids).then(res => {
+				fetch('https://24274915.it.scu.edu.au/api/search?category='+ids).then(res => {
 					return res.json()
 				}).then(response => {
 					const content = document.getElementById('content')
